@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_index.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='Adminlogin.css') }}">
+    <script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+	<title>Debate Forum</title>
+</head>
+<body>
+	<div style="margin-top: 100px">
+		<div>
+			<h1>Admin Login</h1>
+            {% if msg %}
+                <p style="text-align: center;color: red">{{ msg }}</p>
+            {% endif %}
+		</div><br>
+		<div class="formbody">
+			<form method="POST" action="/adminLogin" class="UserForm">
+				<div class="inputUsername">
+					username: <input name="username" value="admin">
+				</div>
+				<div class="inputUsername">
+					password: <input name="password" value="admin">
+				</div>
+				<div style="margin-top: 10px" class="formButton">
+					<input id="B1" type="submit" value="Login">
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+</body>
+</html>

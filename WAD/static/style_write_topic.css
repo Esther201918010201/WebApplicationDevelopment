@@ -1,0 +1,138 @@
+ul.bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 5px;
+  padding-bottom: 25px;
+  min-width: 400px;
+}
+li.bar {
+  display: inline;
+}
+.BarButton {
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px;
+}
+#logo {
+  font-family: ComfortaaRegular;
+  text-shadow: 0px 3px 4px #00000040;
+  margin-right: 8px;
+  float: left;
+  padding-right: 15px;;
+}
+#home {
+  float: left;
+  padding-right: 15px;
+  font-family: MontserratRegular;
+}
+input.tn {
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  font-family: MontserratRegular;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 4px 4px 4px 4px;
+  box-sizing: border-box;
+  resize: none;
+}
+.td {
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  font-family: MontserratRegular;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 4px 4px 4px 4px;
+  height: 300px;
+  box-sizing: border-box;
+  resize: none;
+}
+input[type=text]:focus {
+  border: 3px solid blue;
+}
+textarea:focus {
+  border: 3px solid blue;
+}
+input[type=submit] {
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  padding: 5px 30px 5px 30px;
+  margin: 8px;
+  margin-left: 40%;
+}
+.dropbtn {
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px; 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 50px;
+  right: 0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  font-size: small;
+  padding: 2px 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: transparent;
+}

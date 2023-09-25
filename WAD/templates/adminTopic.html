@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_topic.css">
+	<script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .UserForm span {
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'adminHeader.html' %}
+    <div class="claim">
+		<div class="post_Info">
+            <table class="table">
+                <tr>
+                    <th>Topic_Id</th>
+                    <th>Topic_Title</th>
+                    <th>Topic_Content</th>
+                    <th>Post_Time</th>
+                    <th>User_Id</th>
+                    <th>Operation</th>
+                </tr>
+                {% for topic in topic_li %}
+                <tr>
+                    <td id="topic_id{{ topic.topic_id }}">
+                        {{ topic.topic_id }}
+                    </td>
+                    <td id="topic_title{{ topic.topic_id }}">{{ topic.topic_title }}</td>
+                    <td id="topic_content{{ topic.topic_id }}">{{ topic.topic_content }}</td>
+                    <td id="post_time{{ topic.retopic_id }}">{{ topic.post_time }}</td>
+                    <td id="user_id{{ topic.topic_id }}">
+                        {{ topic.user_id }}
+                    </td>
+
+
+                    <td>
+                        <a id="topicEdit" style="color: deepskyblue" onclick="updateTopic('{{ topic.topic_id }}')" href="#" class="c_Info">Edit</a>
+                        <a style="color: red" href="{{ url_for('delTopic', topic_id=topic.topic_id) }}" class="c_Info">DEL</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+		</div>
+
+
+	</div>
+
+    <div id="formbody" class="formbody">
+			<form method="POST" action="/updateTopic" class="UserForm">
+                <h1>Update</h1>
+				<input id="topic_id" type="hidden" name="topic_id">
+                 <div class="topic_title">
+					<span>topic_title: </span>
+                    <input id="topic_title" name="topic_title" value="">
+				</div>
+                <div class="topic_title">
+					<span>topic_content: </span>
+                    <input id="topic_content" name="topic_content" value="">
+				</div>
+				<div style="margin-top: 10px" class="formButton">
+					<input type="button" onclick="updateTopicData()" value="Update">
+				</div>
+			</form>
+		</div>
+
+    <script>
+        $("#formbody").hide()
+        function updateTopic(topic_id){
+            $("#topic_id").val(topic_id)
+            $("#topic_title").val($("#topic_title"+topic_id).text())
+            $("#topic_content").val($("#topic_content"+topic_id).text())
+            $("#formbody").show()
+        }
+
+        function updateTopicData(index){
+            var topic_id = $("#topic_id").val()
+            var topic_title = $("#topic_title").val()
+            var topic_content = $("#topic_content").val()
+
+
+            $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/updateTopicData",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                topic_id: topic_id,
+                topic_title: topic_title,
+                topic_content: topic_content
+            }
+            ),
+            //请求成功
+            success : function(result) {
+                alert("更新成功")
+                $("#topic_title").val(result.topic_title)
+                $("#topic_content").val(result.topic_content)
+
+
+                $("#topic_title"+topic_id).text(result.topic_title)
+                $("#topic_content"+topic_id).text(result.topic_content)
+
+                $("#formbody").hide()
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+                $("#formbody").hide()
+            }
+        });
+        }
+    </script>
+</body>
+</html>

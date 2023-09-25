@@ -1,0 +1,10 @@
+#B1 {
+    background-color: white;
+	border-width: 2px;
+	border-color: black;
+	color: black;
+	text-align: center;
+	font-family: MontserratRegular;
+	border-radius: 6px;
+	margin: auto;
+}

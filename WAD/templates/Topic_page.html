@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_topic.css">
+	<script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+	<title>Topic</title>
+</head>
+<body>
+	<ul class="bar">
+		<li id="logo">Debate Forum</li>
+		<li id="home"><a class="button" href="{{ url_for('index') }}">Home</a></li>
+		{% if current_user.is_authenticated %}
+		<li>
+			<div class="dropdown">
+				<button class="dropbtn">User</button>
+				<div class="dropdown-content">
+					<a href="{{ url_for('user') }}">user</a>
+					<a href="{{ url_for('logout') }}">log out</a>
+				</div>
+			</div>
+		</li>
+		{% else %}
+		<li><button class="BarButton" id="login">Log in</button></li>
+		{% endif %}
+		<li><a class="BarButton" href="{{ url_for('search') }}"><button class="BarButton">Search</button></a></li>
+	</ul>
+
+	<div class="TopicDesc">
+
+		<div class="TD1">
+			{{ topic.topic_title }}:<br>
+			{{ topic.topic_content }}
+		</div>
+		<div class="TopicInfo">
+			<p>Poster: <a href="{{ url_for('user') }}">{{ topic.user_id }}</a><br></p>
+			<p>Post Time: {{ topic.post_time }}<br></p>
+		</div>
+	</div>
+
+	{% if current_user.is_authenticated %}
+	    <div class="addC"><button type="button" class="addC"><a href="{{ url_for('write_claim', topic_id=topic.topic_id) }}">+ Add a new Claim</a></button></div>
+	{% endif %}
+	<div class="claim">
+        <div class="c_sort">
+            <button class="sort"><a href="/{{ topic.topic_id }}?sort={{ sort }}">sort</a></button>
+        </div>
+		{% for claim in claims %}
+		{% if claim.topic_id==topic.topic_id %}
+		<div class="c_content">	
+			<ul class="claim">
+				<li><a href="{{ url_for('claim', claim_id=claim.claim_id) }}">{{ claim.claim_title }}</a></li>
+			</ul>
+		</div>
+		<div class="post_Info">
+			<ul class="claim">
+				<li><a href="{{ url_for('user') }}" class="c_Info">{{ claim.user_id }}</a>{{ claim.post_time }}</li>
+			</ul><hr id="claimHr">
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+
+	<div class="hide">
+		<div class="formhead">
+			<span class="loginTXT">Log in</span>
+			<button type="button" class="close" id="close">×</button>
+		</div><br>
+		<div class="formbody">
+			<form method="POST" class="UserForm">
+				{{ form.csrf_token }}
+				<div class="inputUsername">
+					<div class="Username">{{ form.name.label }}</div>
+					{{ form.name }}
+					{% for msg in form.name.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+				</div>
+				<div class="inputPassword">
+					<div class="Password">{{ form.password.label }}</div>
+					{{ form.password }}
+					{% for msg in form.password.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+                    {{ message }}
+				</div>
+				<div class="formButton">
+					{{ form.Login }}<br>
+					{{ form.Register }}
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

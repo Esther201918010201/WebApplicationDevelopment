@@ -1,0 +1,279 @@
+ul.bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 5px;
+  padding-bottom: 25px;
+  min-width: 400px;
+}
+li.bar {
+	display: inline;
+}
+.BarButton {
+	background-color: white;
+	border-width: 2px;
+	border-color: black;
+	color: black;
+	text-align: center;
+	display: inline-block;
+	font-family: MontserratRegular;
+	border-radius: 6px;
+	float: right;
+	margin: auto 4px;
+}
+#logo {
+	font-family: ComfortaaRegular;
+	text-shadow: 0px 3px 4px #00000040;
+	margin-right: 8px;
+	float: left;
+    padding-right: 10px;
+}
+#home {
+	float: left;
+    padding-right: 10px;
+	font-family: MontserratRegular;
+}
+#topic {
+	float: left;
+    padding-right: 10px;
+	font-family: MontserratRegular;
+}
+div.ClaimDesc {
+	max-width: 1000px;
+	margin-bottom: 15px;
+    margin-left: auto;
+    margin-right: auto;
+	font-family: MontserratRegular;
+	border: 2px solid #00000080;
+	border-radius: 10px;
+}
+div.CD1 {
+	text-align: left;
+	margin: 10px 10px 10px 10px;
+}
+div.ClaimInfo {
+	text-align: right;
+	margin: 10px 10px 10px 10px;
+	font-size: 60%;
+}
+a {
+	color: black;
+}
+button.addR {
+	border: 1px solid #00000080;
+	background-color: white;
+	border-radius: 6px;
+	font-family: MontserratRegular;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	max-width: 250px;
+	padding: 4px 20px 4px 20px;
+}
+div.addR {
+	text-align: center;
+}
+div.c_sort {
+    text-align: right;
+}
+button.sort {
+    border: 1px solid #00000080;
+	background-color: white;
+	border-radius: 6px;
+	font-family: MontserratRegular;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	max-width: 250px;
+	padding: 4px 20px 4px 20px;
+}
+div.reply {
+	max-width: 1000px;
+	font-family: MontserratRegular;
+	border: 1.5px solid #00000040;
+	padding: 10px;
+	margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.r_content1 {
+	text-align: left;
+	margin: 10px;
+}
+ul.r_content1 {
+	list-style-type: none;
+	padding: 10px;
+	margin: 0;
+}
+div.postInfo {
+	max-width: 1000px;
+	margin: 0;
+	padding: 5px 10px 5px 5px;
+	text-align: right;
+	font-size: 90%;
+}
+a.postInfo {
+	padding: 5px;
+}
+button.addRr {
+	border: 1px solid #00000080;
+	background-color: white;
+	border-radius: 8px;
+	font-family: MontserratRegular;
+	font-size: 80%;
+	padding: 4px 12px 4px 12px;
+}
+div.rrply {
+	max-width: 950px;
+	display: block;
+	margin: auto;
+	padding: 10px;
+	border: 1px solid #00000040;
+}
+ul.rrply {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+div.rr_content {
+	text-align: left;
+	margin: 0;
+	padding: 0;
+}
+div.rr_Info {
+	text-align: right;
+	font-size: 90%;
+}
+a.rr_Info {
+	padding: 5px;
+}
+#claimHr {
+  margin:0 auto;
+  border: 0;
+  height: 2px;
+  border-top: 1px solid black;
+  border-bottom: 0;
+}
+
+.hide {
+  font-family: MontserratRegular;
+  background-color: white;
+  width: 210px;
+  height: 240px;
+  margin-right: auto;
+  position:absolute;
+  left: 35%;
+  top: 20%;
+  display: none;
+  z-index:1;
+}
+div.formhead {
+  width: 200px;
+  height: 20px;
+  margin: auto;
+  padding: 2px 2px 2px 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+div.formbody {
+  text-align: center;
+}
+span.loginTXT {
+  float: left;
+}
+button.close {
+  float: right;
+  font-size: large;
+  background-color: transparent;
+  border: none;
+}
+div.inputPassword {
+  margin-top: 10px;
+}
+#in-username {
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  height: 20px;
+}
+#in-passw {
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  height: 20px;
+}
+#loginButton {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  width: 80px;
+  padding: 2px 0px 2px 0px;
+  margin-top: 15px;
+  border-radius: 6px;
+}
+#registerButton {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  width: 80px;
+  padding: 2px 0px 2px 0px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+.dropbtn {
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px; 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 50px;
+  right: 0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  font-size: small;
+  padding: 2px 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: transparent;
+}

@@ -1,0 +1,264 @@
+ul.bar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  margin-bottom: 5px;
+  padding-bottom: 25px;
+  min-width: 400px;
+}
+.post_Info table {
+    text-align: left;
+}
+.adminHeader {
+            border-radius: 2px;
+            max-width: 1000px;
+            margin: auto;
+            padding: 5px;
+            font-family: MontserratRegular;
+            display: block;
+        }
+.adminHeader a {
+    display: inline-block;
+    text-align: center;
+    width: 33%;
+
+}
+
+li.bar {
+	display: inline;
+}
+.BarButton {
+	background-color: white;
+	border-width: 2px;
+	border-color: black;
+	color: black;
+	text-align: center;
+	display: inline-block;
+	font-family: MontserratRegular;
+	border-radius: 6px;
+	float: right;
+	margin: auto 4px;
+}
+#logo {
+	font-family: ComfortaaRegular;
+	text-shadow: 0px 3px 4px #00000040;
+	margin-right: 8px;
+	float: left;
+    padding-right: 15px;
+}
+#home {
+  float: left;
+  padding-right: 15px;
+  font-family: MontserratRegular;
+}
+#topic1 {
+	float: left;
+    padding-right: 15px;
+	font-family: MontserratRegular;
+}
+div.TopicDesc {
+	max-width: 1000px;
+  margin: auto;
+  margin-bottom: 20px;
+	font-family: MontserratRegular;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #00000080;
+	border-radius: 10px;
+/*	color: black;
+	column-count: 2;*/
+}
+div.TD1 {
+	text-align: left;
+	margin: 10px 10px 10px 10px;
+}
+div.TopicInfo {
+	text-align: right;
+	margin: 10px 10px 10px 10px;
+	font-size: 60%;
+}
+a {
+	color: black;
+}
+button.addC {
+	border: 1px solid #00000080;
+	background-color: white;
+	border-radius: 6px;
+	font-family: MontserratRegular;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	max-width: 250px;
+	padding: 4px 20px 4px 20px;
+}
+div.addC {
+	text-align: center;
+}
+div.c_sort {
+    text-align: right;
+}
+button.sort {
+    border: 1px solid #00000080;
+	background-color: white;
+	border-radius: 6px;
+	font-family: MontserratRegular;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	max-width: 250px;
+	padding: 4px 20px 4px 20px;
+}
+div.claim {
+	border: 2px solid #00000040;
+	border-radius: 2px;
+	max-width: 1000px;
+	margin: auto;
+	padding: 5px;
+	font-family: MontserratRegular;
+	display: block;
+}
+ul.claim {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+div.c_content {
+	text-align: left;
+}
+div.post_Info {
+	text-align: right;
+	font-size: 90%;
+}
+a.c_Info {
+	padding: 5px;
+}
+#claimHr {
+  margin:0 auto;
+  border: 0;
+  height: 2px;
+  border-top: 1px solid black;
+  border-bottom: 0;  
+}
+
+.hide {
+  font-family: MontserratRegular;
+  background-color: white;
+  width: 210px;
+  height: 240px;
+  margin-right: auto;
+  position:absolute;
+  left: 35%;
+  top: 20%;
+  display: none;
+  z-index:1;
+}
+div.formhead {
+  width: 200px;
+  height: 20px;
+  margin: auto;
+  padding: 2px 2px 2px 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+div.formbody {
+  text-align: center;
+}
+span.loginTXT {
+  float: left;
+}
+button.close {
+  float: right;
+  font-size: large;
+  background-color: transparent;
+  border: none;
+}
+div.inputPassword {
+  margin-top: 10px;
+}
+#in-username {
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  height: 20px;
+}
+#in-passw {
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  height: 20px;
+}
+#loginButton {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  width: 80px;
+  padding: 2px 0px 2px 0px;
+  margin-top: 15px;
+  border-radius: 6px;
+}
+#registerButton {
+  background-color: white;
+  border-color: black;
+  border-width: 2px;
+  width: 80px;
+  padding: 2px 0px 2px 0px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+.dropbtn {
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  background-color: white;
+  border-width: 2px;
+  border-color: black;
+  color: black;
+  text-align: center;
+  display: inline-block;
+  font-family: MontserratRegular;
+  border-radius: 6px;
+  float: right;
+  margin: auto 4px; 
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 50px;
+  right: 0;
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  font-size: small;
+  padding: 2px 2px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: white}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: transparent;
+}

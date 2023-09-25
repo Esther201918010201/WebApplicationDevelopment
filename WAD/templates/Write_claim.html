@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_write_claim.css') }}">
+	<script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery_login.js') }}"></script>
+	<title>Claim write page</title>
+</head>
+<body>
+	<ul class="bar">
+		<li id="logo">Debate Forum</li>
+		<li id="home"><a class="button" href="{{ url_for('index') }}">Home</a></li>
+		<li id="topic"><a href="{{ url_for('topic', topic_id=topic.topic_id) }}">{{ topic.topic_title }}</a></li>
+		<li>
+			<div class="dropdown">
+				<button class="dropbtn">User</button>
+				<div class="dropdown-content">
+					<a href="{{ url_for('user') }}">user</a>
+					<a href="{{ url_for('logout') }}">log out</a>
+				</div>
+			</div>
+		</li>
+		<li><a class="BarButton" href="{{ url_for('search') }}"><button class="BarButton">Search</button></a></li>
+	</ul>
+	<form class="form" method="POST">
+		<label>Claim title:<br></label>
+		<input type="text" name="tname" class="tn"><br>
+		<label>Claim description:<br></label>
+		<textarea name="tdesc" class="td"></textarea>
+		<label>Related to: </label>
+		<select name="r1_">
+		{% for claim in claim_li %}
+            {% if claim.topic_id ==topic.topic_id %}
+			<option name="r1_" value="{{claim.claim_id}}">{{ claim.claim_title }}</option>
+            {% endif %}
+		{% endfor %}
+		</select><br>
+		<label>Relationship: </label>
+		<select name="r1">
+			<option name="r1" value="Opposed">Opposed</option>
+			<option name="r1" value="Equivalent">Equivalent</option>
+		</select><br>
+{#		<button class="addRela">+ Add relationship</button>#}
+		<input type="submit" name="submit" value="Send">
+	</form>
+</body>
+</html>

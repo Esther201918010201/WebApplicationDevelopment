@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_claim.css') }}">
+	<script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery_login.js') }}"></script>
+	<title>Claim</title>
+</head>
+<body>
+	<ul class="bar">
+		<li id="logo">Debate Forum</li>
+		<li id="topic"><a href="{{ url_for('topic', topic_id=claim.topic_id) }}">{{ topic.topic_title }}</a></li>
+		<li id="home"><a class="button" href="{{ url_for('index') }}">Home</a></li>
+		{% if current_user.is_authenticated %}
+		<li>
+			<div class="dropdown">
+				<button class="dropbtn">User</button>
+				<div class="dropdown-content">
+					<a href="{{ url_for('user') }}">user</a>
+					<a href="{{ url_for('logout') }}">log out</a>
+				</div>
+			</div>
+		</li>
+		{% else %}
+		<li><button class="BarButton" id="login">Log in</button></li>
+		{% endif %}
+		<li><a class="BarButton" href="{{ url_for('search') }}"><button class="BarButton">Search</button></a></li>
+	</ul>
+	<div class="ClaimDesc">
+		<div class="CD1">
+			{{ claim.claim_title }}:<br>
+			{{ claim.claim_content }}
+            {% if relClaimClaim %}
+			    <p>Related to: <a href="{{ url_for('claim', claim_id=relClaimClaim.claim_id) }}">{{ relClaimClaim.claim_title }}</a></p>
+                <p>Relationship: <a href="#relationship">{{ claimToClaim.relation_cc }}</a></p>
+		    {% endif %}
+        </div>
+		<div class="ClaimInfo">
+			<p>Poster: <a href="{{ url_for('user') }}">{{ claim.user_id }}</a><br></p>
+			<p>Post Time: {{ claim.post_time }}<br></p>
+		</div>
+	</div>
+	{% if current_user.is_authenticated %}
+	<div  class="addR"><button type="button" class="addR"><a href="{{ url_for('reply', claim_id=claim.claim_id) }}">+ Add a Reply</a></button></div>
+
+    {% endif %}
+	<div class="reply">
+    <div class="c_sort">
+            <button class="sort"><a href="/claim/{{ claim.claim_id }}?sort={{ sort }}">sort</a></button>
+        </div>
+    <div id="mycomment">
+		{% for reply in replys %}
+		{% if reply.claim_id==claim.claim_id %}
+
+		<div class="r_content">
+			<ul class="r_content1">
+				<li class="r_content1">
+					{{ reply.reply_content}}<br>
+                    {% if reply.retore %}
+                        <p style="font-size: 12px;color: darkgray">Reply : {{ reply.retore.reply_content }}</p>
+                        {% if reply.reply_reply %}
+                            <p style="font-size: 12px;color: darkgray">Relationship : {{ reply.reply_reply.relation_rr }}</p>
+                        {% endif %}
+                    {% else %}
+                        <p style="font-size: 12px;color: darkgray">{{ reply.reply_claim.relation_rc }} : {{ claim.claim_title }}</p>
+                    {% endif %}
+
+
+{#					<p>Related: <a href="{{ url_for('claim', claim_id=claim.claim_id) }}">{{ claim.claim_title }}</a></p>#}
+{#					<p>Relationship: <a href="#relationship">clarification</a></p>#}
+				</li>
+			</ul>
+		</div>
+		<div class="postInfo">
+			{% if current_user.is_authenticated %}
+			<button type="button" class="addRr"><a href="{{ url_for('rereply', reply_id=reply.reply_id) }}">+ Add a Reply</a></button>
+			{% endif %}
+			<a href="{{ url_for('user') }}" class="postInfo">{{ reply.user_id}}</a><a href="#" class="postInfo">{{ reply.post_time }}</a>
+		</div><hr id="claimHr">
+		{% endif %}
+		{% endfor %}
+    </div>
+	</div>
+
+	<div class="hide">
+		<div class="formhead">
+			<span class="loginTXT">Log in</span>
+			<button type="button" class="close" id="close">×</button>
+		</div><br>
+		<div class="formbody">
+			<form method="POST" class="UserForm">
+				{{ form.csrf_token }}
+				<div class="inputUsername">
+					<div class="Username">{{ form.name.label }}</div>
+					{{ form.name }}
+					{% for msg in form.name.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+				</div>
+				<div class="inputPassword">
+					<div class="Password">{{ form.password.label }}</div>
+					{{ form.password }}
+					{% for msg in form.password.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+                    {{ message }}
+				</div>
+				<div class="formButton">
+					{{ form.Login }}<br>
+					{{ form.Register }}
+				</div>
+			</form>
+		</div>
+	</div>
+<script>
+    var replaySize = {{ replys | length }}
+    setInterval(() => {
+        $.ajax({
+
+            type : "GET",
+
+            contentType: "application/json;charset=UTF-8",
+
+            url : "/replyCount/{{ claim.claim_id }}/"+replaySize,
+
+            success : function(result) {
+                if (result != "None") {
+                    replaySize += 1
+                    console.log(result.replyList)
+                    var retore = result.retore
+                    var replyToReply = result.replyToReply
+                    var replyToClaim = result.replyToClaim
+                    result.replyList.forEach(replay => {
+                        var data = "<div class='r_content'>"+
+			"<ul class='r_content1'>"+
+				"<li class='r_content1'>"+
+					""+ replay.reply_content+"<br>";
+                        if (retore != null) {
+                            data+="<p style='font-size: 12px;color: darkgray'>reply : "+retore.reply_content+"</p>"
+                            if (replyToReply != null) {
+                                data+="<p style='font-size: 12px;color: darkgray'>viewpoint : "+replyToReply.relation_rr+"</p>"
+                            }
+                        } else {
+                            data+="<p style='font-size: 12px;color: darkgray'>"+replyToClaim.relation_rc+" : {{ claim.claim_title }}</p>"
+                        }
+
+					data+="<p>Related: <a href='{{ url_for('claim', claim_id=claim.claim_id) }}'>{{ claim.claim_title }}</a></p>"
+					data+="<p>Relationship: <a href='#relationship'>clarification</a></p>"
+				data+="</li>"
+			data+="</ul>"
+		data+="</div>"
+
+                        $("#mycomment").append(data)
+                    })
+                }
+            },
+
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }, 1000)
+
+</script>
+</body>
+</html>

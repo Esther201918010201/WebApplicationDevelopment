@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_topic.css">
+	<script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .UserForm span {
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'adminHeader.html' %}
+    <div class="claim">
+		<div class="post_Info">
+            <table class="table">
+                <tr>
+                    <th>Reply_Id</th>
+                    <th>Claim_Id</th>
+                    <th>Reply_Content</th>
+                    <th>Post_Time</th>
+                    <th>User_Id</th>
+                    <th>ReReply_Id</th>
+                    <th>Operation</th>
+                </tr>
+                {% for reply in reply_li %}
+                <tr>
+                    <td id="reply_id{{ reply.reply_id }}">
+                        {{ reply.reply_id }}
+                    </td>
+                    <td id="reply_id{{ reply.claim_id }}">
+                        {{ reply.claim_id }}
+                    </td>
+                    <td id="reply_content{{ reply.reply_id }}">{{ reply.reply_content }}</td>
+                    <td id="user_id{{ reply.reply_id }}">
+                        {{ reply.user_id }}
+                    </td>
+                    <td id="post_time{{ reply.rereply_id }}">{{ reply.post_time }}</td>
+                    <td id="user_id{{ reply.rereply_id }}">
+                        {{ reply.user_id }}
+                    </td>
+
+                    <td>
+                        <a id="replyEdit" style="color: deepskyblue" onclick="updateReply('{{ reply.reply_id }}')" href="#" class="c_Info">Edit</a>
+                        <a style="color: red" href="{{ url_for('delReply', reply_id=reply.reply_id) }}" class="c_Info">DEL</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+		</div>
+
+
+	</div>
+
+    <div id="formbody" class="formbody">
+			<form method="POST" action="/updateReply" class="UserForm">
+                <h1>Update</h1>
+				<input id="reply_id" type="hidden" name="reply_id">
+                <div class="reply_title">
+					<span>reply_content: </span>
+                    <input id="reply_content" name="reply_content" value="">
+				</div>
+				<div style="margin-top: 10px" class="formButton">
+					<input type="button" onclick="updateReplyData()" value="Update">
+				</div>
+			</form>
+		</div>
+
+    <script>
+        $("#formbody").hide()
+        function updateReply(reply_id){
+            $("#reply_id").val(reply_id)
+            $("#reply_content").val($("#reply_content"+reply_id).text())
+            $("#formbody").show()
+        }
+
+        function updateReplyData(index){
+            var reply_id = $("#reply_id").val()
+            var reply_content = $("#reply_content").val()
+
+
+            $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/updateReplyData",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                reply_id: reply_id,
+                reply_content: reply_content
+            }
+            ),
+            //请求成功
+            success : function(result) {
+                alert("更新成功")
+                $("#reply_content").val(result.reply_content)
+
+                $("#reply_content"+reply_id).text(result.reply_content)
+
+                $("#formbody").hide()
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+                $("#formbody").hide()
+            }
+        });
+        }
+    </script>
+</body>
+</html>

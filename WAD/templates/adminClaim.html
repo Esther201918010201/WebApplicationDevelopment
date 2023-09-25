@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_topic.css">
+	<script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .UserForm span {
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'adminHeader.html' %}
+    <div class="claim">
+
+
+		<div class="post_Info">
+            <table class="table">
+                <tr>
+                    <th>Claim_Id</th>
+                    <th>Claim_Title</th>
+                    <th>Topic_Id</th>
+                    <th>Claim_Content</th>
+                    <th>User_Id</th>
+                    <th>Post_Time</th>
+                    <th>Operation</th>
+                </tr>
+                {% for claim in claim_li %}
+                <tr>
+                    <td id="claim_id{{ claim.claim_id }}">
+                        {{ claim.claim_id }}
+                    </td>
+                    <td id="claim_title{{ claim.claim_id }}">{{ claim.claim_title }}</td>
+                    <td id="topic_id{{ claim.claim_id }}">
+                        {{ claim.topic_id }}
+                    </td>
+                    <td id="claim_content{{ claim.claim_id }}">{{ claim.claim_content }}</td>
+                    <td id="user_id{{ claim.claim_id }}">
+                        {{ claim.user_id }}
+                    </td>
+                    <td id="post_time{{ claim.claim_id }}">
+                        {{ claim.post_time }}
+                    </td>
+                    <td>
+                        <a id="claimEdit" style="color: deepskyblue" onclick="updateClaim('{{ claim.claim_id }}')" href="#" class="c_Info">Edit</a>
+                        <a style="color: red" href="{{ url_for('delclaim', claim_id=claim.claim_id) }}" class="c_Info">DEL</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+		</div>
+
+
+	</div>
+
+    <div id="formbody" class="formbody">
+			<form method="POST" action="/updateClaim" class="UserForm">
+                <h1>Update</h1>
+				<input id="claim_id" type="hidden" name="claim_id">
+				<div class="claim_title">
+					<span>claim_title: </span>
+                    <input id="claim_title" name="claim_title" value="">
+				</div>
+                <div class="claim_title">
+					<span>claim_content: </span>
+                    <input id="claim_content" name="claim_content" value="">
+				</div>
+				<div style="margin-top: 10px" class="formButton">
+					<input type="button" onclick="updateClaimData()" value="Update">
+				</div>
+			</form>
+		</div>
+
+    <script>
+        $("#formbody").hide()
+        function updateClaim(claim_id){
+            $("#claim_id").val(claim_id)
+            $("#claim_title").val($("#claim_title"+claim_id).text())
+            $("#claim_content").val($("#claim_content"+claim_id).text())
+            $("#formbody").show()
+        }
+
+        function updateClaimData(index){
+            var claim_id = $("#claim_id").val()
+            var claim_title = $("#claim_title").val()
+            var claim_content = $("#claim_content").val()
+
+
+            $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/updateClaimData",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                claim_id: claim_id,
+                claim_title: claim_title,
+                claim_content: claim_content
+            }
+            ),
+            //请求成功
+            success : function(result) {
+                alert("更新成功")
+                $("#claim_title").val(result.claim_title)
+                $("#claim_content").val(result.claim_content)
+
+                $("#claim_title"+claim_id).text(result.claim_title)
+                $("#claim_content"+claim_id).text(result.claim_content)
+
+                $("#formbody").hide()
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+                $("#formbody").hide()
+            }
+        });
+        }
+    </script>
+</body>
+</html>

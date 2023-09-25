@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="static/style_search.css">
+    <link rel="stylesheet" type="text/css" href="static/style_index.css">
+	<script src="static/jquery-3.6.0.min.js"></script>
+	<script src="static/jquery_login.js"></script>
+	<title>Search</title>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+	<ul class="bar">
+		<li id="logo">Debate Forum</li>
+		<li id="home"><a class="button" href="{{ url_for('index') }}">Home</a></li>
+		{% if current_user.is_authenticated %}
+		<li>
+			<div class="dropdown">
+				<button class="dropbtn">User</button>
+				<div class="dropdown-content">
+					<a href="{{ url_for('user') }}">user</a>
+					<a href="{{ url_for('logout') }}">log out</a>
+				</div>
+			</div>
+		</li>
+		{% else %}
+		<li><button class="BarButton" id="login">Log in</button></li>
+		{% endif %}
+	</ul>
+
+	<form class="searchBar" method="post" action="/search">
+		<input type="search" name="keywords" placeholder="Type keywords...">
+		<input type="submit" value="Search" id="searchButton">
+	</form>
+
+	<div style="margin-top: 30px">
+        <div class="topic_list">
+            <ul class="topic_list">
+                {% for topic in results %}
+                    <li><a href="{{ url_for('topic', topic_id=topic.topic_id) }}">{{ topic.topic_title }}</a></li>
+                {% endfor %}
+                {% if current_user.is_authenticated %}
+                    <br><a id="addT" href="{{ url_for('write_topic') }}">+ Add a new topic</a>
+                {% endif %}
+                {% for claim in results2 %}
+                    <li><a href="{{ url_for('claim', claim_id=claim.claim_id) }}">{{ claim.claim_title }}</a></li>
+                {% endfor %}
+                {% for claim in results2 %}
+                    <li><a href="{{ url_for('claim', claim_id=claim.claim_id) }}">{{ claim.claim_title }}</a></li>
+                {% endfor %}
+                {% if current_user.is_authenticated %}
+                    <br><a id="addT" href="{{ url_for('write_topic') }}">+ Add a new topic</a>
+                {% endif %}
+            </ul>
+        </div>
+
+	</div>
+
+
+	<div class="hide">
+		<div class="formhead">
+			<span class="loginTXT">Log in</span>
+			<button type="button" class="close" id="close">×</button>
+		</div><br>
+		<div class="formbody">
+			<form method="POST" class="UserForm">
+				{{ form.csrf_token }}
+				<div class="inputUsername">
+					<div class="Username">{{ form.name.label }}</div>
+					{{ form.name }}
+					{% for msg in form.name.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+				</div>
+				<div class="inputPassword">
+					<div class="Password">{{ form.password.label }}</div>
+					{{ form.password }}
+					{% for msg in form.password.errors %}<p>{{ msg }}</p>
+					{% endfor %}
+                    {{ message }}
+				</div>
+				<div class="formButton">
+					{{ form.Login }}<br>
+					{{ form.Register }}
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

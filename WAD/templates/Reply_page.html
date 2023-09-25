@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/open-sans" type="text/css"/>
+	<link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/comfortaa-bold" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style_reply.css') }}">
+	<script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='jquery_login.js') }}"></script>
+	<title>Reply</title>
+</head>
+<body>
+	<ul class="bar">
+		<li id="logo">Debate Forum</li>
+		<li id="topic"><a href="{{ url_for('claim', claim_id=claim.claim_id) }}">{{ claim.claim_title }}</a></li>
+		<li id="home"><a class="button" href="{{ url_for('index') }}">Home</a></li>
+		<li>
+			<div class="dropdown">
+				<button class="dropbtn">User</button>
+				<div class="dropdown-content">
+					<a href="{{ url_for('user') }}">user</a>
+					<a href="{{ url_for('logout') }}">log out</a>
+				</div>
+			</div>
+		</li>
+		<li><a class="BarButton" href="{{ url_for('search') }}"><button class="BarButton">Search</button></a></li>
+	</ul>
+	<form method="post" class="form">
+        {% if  reply  %}
+            <input type="hidden" name="parentId" value="{{ reply.reply_id }}">
+        {% endif %}
+		<label>Reply:<br></label>
+		<textarea name="tdesc" class="td"></textarea>
+		<label>Related to: </label>
+		<select id="category" name="category">
+			<option value="Claim">Claim</option>
+            {% if reply %}
+                <option value="Reply">Reply</option>
+            {% endif %}
+
+		</select><br>
+		<label>Relationship: </label>
+		<select id="ClaimRel" name="relation_rc">
+			<option value="clarification">Clarification</option>
+			<option value="supporting">Supporting</option>
+			<option value="counterargument">Counterargument</option>
+		</select>
+        {% if  reply  %}
+		<select id="ReplyRel" name="relation_rr">
+			<option value="evidence">Evidence</option>
+			<option value="support">Support</option>
+			<option value="rebuttal">Rebuttal</option>
+		</select><br>
+        {% endif %}
+		<input type="submit" name="submit" value="Send">
+	</form>
+
+    <script>
+        $("#ReplyRel").hide()
+        $("#category").change(function(){
+             var selected=$(this).children('option:selected').val();
+             if(selected == 'Claim'){
+                 $("#ReplyRel").hide()
+                 $("#ClaimRel").show()
+             }else if(selected == 'Reply'){
+                 $("#ClaimRel").hide()
+                 $("#ReplyRel").show()
+             }
+         });
+    </script>
+</body>
+</html>
